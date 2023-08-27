@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+    <title>{{ title }}</title>
+</head>
+<body>
+<div class="page">
+          <div class="header">
+              <a href="{% url 'index' %}">GitHub Pokusaj</a>
+              &nbsp;
+              {% if request.user.is_authenticated %}
+              <a href="{% url 'kase_logout' %}">Odjava</a>
+              {% else %}
+              <a href="{% url 'kase_login' %}">LogIn</a>
+              <a href="{% url 'register' %}">Register</a>
+              {% endif %}
+          </div>
+
+          {% if request.user.is_authenticated %}
+          <div class="left">
+              <ul>
+                  <li>
+                      <a href="{% url 'issues' %}">Issues</a>
+                  </li>
+                  <li>
+                      <a href="{% url 'lista_repozitorijuma'  %}">Repos</a>
+                  </li>
+                  <li>
+                      <a href="{% url 'izmenaProfila' %}">Profil</a>
+                  </li>
+                  <li>
+                      <a href="{% url 'pullreq' %}">Pull Requests</a>
+                  </li>
+                  <li>
+                      <a href="{% url 'branches' %}">Branches</a>
+                  </li>
+                  <li>
+                      <a href="{% url 'milestones' %}">Milestones</a>
+                  </li>
+              </ul>
+              {% block links %}{% endblock %}
+          </div>
+
+          <div class="center">
+              {% block content %}{% endblock %}
+          </div>
+          {% endif %}
+          <div class="footer">Primer za vezbe iz predmeta Softverski obrasci i komponente</div>
+</div>
+</body>
+</html>

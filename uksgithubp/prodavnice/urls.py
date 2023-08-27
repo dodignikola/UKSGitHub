@@ -1,0 +1,36 @@
+from django.urls import path
+
+from . import views, branches, pullreq,removeUser, milestone, log_view,tasks, izmenaProfila, repo_view, issues
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('login', log_view.login, name='login'),
+    path('logout', log_view.logout, name='logout'),
+    path('profil', izmenaProfila.izmenaProfila, name='izmenaProfila'),
+    path('brisanje/profila/', izmenaProfila.brisanjeProfila, name='brisanjeProfila'),
+    path('register', izmenaProfila.registracija, name='register'),
+    path('repositoriums/', repo_view.listaRepozitorijuma, name='lista_repozitorijuma'),
+    path('unosrepo/', repo_view.novirepo, name='unos_repo'),
+    path('issues/', issues.issues, name='issues'),
+    path('unosIssue/', issues.unosIssue, name='unosIssue'),
+    path('obrisirepo/<int:id>',repo_view.obrisirepo, name='obrisiRepo' ),
+    path('repo/<int:id>',repo_view.repo, name='repo' ),
+    path('issue/<int:id>', issues.issue, name='issue'),
+    path('issueot/<int:id>', issues.otvori, name='otvoriIssue'),
+    path('issuezat/<int:id>', issues.zatvori, name='zatvoriIssue'),
+    path('obrisiissue/<int:id>',issues.obrisiissue, name='obrisiissue' ),
+    path('task/<int:id>',tasks.kom, name='dodajKomentar' ),
+    path('task/<int:id>',tasks.task, name='task' ),
+    path('obrisitask/<int:id>',tasks.obrisitask, name='obrisitask' ),
+    path('milestones/',milestone.milestones, name='milestones' ),
+    path('nmilestone/',milestone.nmilestone, name='nmilestone' ),
+    path('obrisimile/<int:id>',milestone.obrisiMile, name='obrisiMile' ),
+    path('pullreq', pullreq.pullreq, name='pullreq'),
+    path('brances', branches.branches, name='branches'),
+    path('novagrana', branches.novagrana, name='novagrana'),
+    path('brisiGrane/<int:id>',branches.brisiGrane, name='brisiGrane' ),
+    path('opcijerepo/<int:id>',repo_view.opcijeRepo, name='opcijeRepo' ),
+    path('promeniNazRepo/<int:id>',repo_view.promeniNazRepo, name='promeniNazRepo' ),
+    path('ukloniUsera/<int:id>', removeUser.removeUser, name = 'ukloniUsera'),
+    path('dodajUsera/<int:id>', removeUser.adduser, name = 'dodajUsera'),
+]
