@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+{% if repo %}
+<h1>Repozitorijum</h1>
+<form method="post"action="{% url 'promeniNazRepo' id=repo.id%}">
+        {% csrf_token %}
+    <table>
+        <input type="text" name="repo" value="{{ repo.title }}" /></td>
+        <input type="submit" value="Promeni"/>
+    </table>
+</form>
+{% endif %}
+{% if branc %}
+<h1>Grane</h1>
+    <table>
+      <tr>
+        <th>Naziv</th>
+        <th>Perent</th>
+      </tr>
+    {% for p in branc %}
+      <tr>
+        <td>{{p.name}}</td>
+        <td>{{p.parent_branch}}</td>
+        <td><a href="{% url 'brisiGrane' id=p.id %}">Obrisi</a></td>
+      </tr>
+    {% endfor %}
+    </table>
+<h1>Korisnici</h1>
+    <table>
+      <tr>
+        <th>Naziv</th>
+      </tr>
+    {% for p in user %}
+      <tr>
+        <td>{{p.username}}</td>
+        <td><a href="{% url 'ukloniUsera' id=p.id %}">Obrisi</a></td>
+      </tr>
+    {% endfor %}
+    </table>
+<h1>Dodaj</h1>
+{% if users %}
+<form method="post" action="{% url 'dodajUsera' id=repo.id%}">
+    {% csrf_token %}
+    <table>
+      <select name="users">
+                    {% for p in users %}
+                        <option value="{{ p.id }}"
+                           {% if users %}
+                               {% if p.id == users.id %}
+                                    selected
+                               {% endif %}
+                           {% endif %}
+                        >{{ p.username }}</option>
+                    {% endfor %}
+                </select>
+    </table>
+    <input type="submit" value="Dodaj"/>
+    </form>
+{%endif%}
+{% else %}
+   <p>Nema Aktivnih Grana</p>
+{% endif %}
+{% endblock %}
