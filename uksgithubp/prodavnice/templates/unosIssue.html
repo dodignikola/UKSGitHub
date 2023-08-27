@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 >Kreirajte novi Issue:</h1>
+    <form method="post" action="{% url 'unosIssue' %}">
+        {% csrf_token %}
+        <div class="label">Naziv:</div>
+        <div class="unos"><input type="text" name="title" value="{{ title }}" /></div>
+        {% if greska_title %}
+        <div class="greska" >{{greska_title}}</div>
+        {% endif %}
+        <div class="label">Opis:</div>
+        <div class="unos"><input type="text" name="description" value="{{ description }}"></div>
+        {% if greska_opis %}
+        <div class="greska" >{{greska_opis}}</div>
+        {% endif %}
+        <br>
+                <tr><td>Repozitorijum:</td>
+            <td>
+                <select name="repo">
+                    {% for p in repo %}
+                        <option value="{{ p.id }}"
+                           {% if repo %}
+                               {% if p.id == repo.id %}
+                                    selected
+                               {% endif %}
+                           {% endif %}
+                        >{{ p.title }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                {% if greska_repo %}
+                <div class="greska" >{{greska_repo}}</div>
+                {% endif %}
+            </td>
+        </tr>
+        <br>
+        <br>
+        <tr><td>Assignee:</td>
+            <td>
+                <select name="users">
+                    {% for p in users %}
+                        <option value="{{ p.id }}"
+                           {% if users %}
+                               {% if p.id == users.id %}
+                                    selected
+                               {% endif %}
+                           {% endif %}
+                        >{{ p.username }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                {% if greska_prodavnica %}
+                <div class="greska" >{{greska_prodavnica}}</div>
+                {% endif %}
+            </td>
+        </tr>
+        <br><br>
+                <tr><td>Milestone:</td>
+            <td>
+                <select name="milestone">
+                    {% for p in milestone %}
+                        <option value="{{ p.id }}"
+                           {% if milestone %}
+                               {% if p.id == milestone.id %}
+                                    selected
+                               {% endif %}
+                           {% endif %}
+                        >{{ p.ime }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                {% if greska_prodavnica %}
+                <div class="greska" >{{greska_prodavnica}}</div>
+                {% endif %}
+            </td>
+        </tr>
+        <br><br>
+        <div  class="dugme"><input type="submit" value="unesi"/></div>
+
+    </form>
+{% endblock %}

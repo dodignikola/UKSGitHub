@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+{%  if issue.is_open == True %}
+<h1>ISSUE : {{issue.title}}</h1>
+    <form method="post" action="{% url 'issue' id=issue.id%}">
+        {% csrf_token %}
+        <br>
+    <td><a href="{% url 'zatvoriIssue' id=issue.id %}">Zatvori</a></td>
+
+    </form>
+{% endif %}
+{%  if issue.is_open == False %}
+<h1>ISSUE : {{issue.title}}</h1>
+    <form method="post" action="{% url 'issue' id=issue.id%}">
+        {% csrf_token %}
+        <br>
+    <td><a href="{% url 'otvoriIssue' id=issue.id %}">Otvori</a></td>
+
+    </form>
+{% endif %}
+{% endblock %}
