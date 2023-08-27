@@ -1,0 +1,95 @@
+@startuml
+enum Visibility {
+ PUBLIC
+ PRIVATE 
+}
+
+enum State {
+  OPEN
+  CLOSE
+  MERGED
+}
+
+class User{
+  username: string
+  password: string 
+}
+enum ReactionType {
+  LIKE 
+  DISLIKE
+  SMILE
+  HORAY
+  CONFUSED
+  HEART
+  ROCKET
+  EYES
+}
+
+class Task {
+  title: string
+  description: string
+  dateCreated: date
+}
+
+class Repositorium{
+  title: string
+  description: string
+  visibility: Visibility
+  link: string
+  licence: string
+}
+
+class Milestone {
+  title: string
+  description: string
+  duedate: date
+  is_open: boolean
+}
+
+class Event {
+  dateTime: date
+}
+
+class Issue {
+  name: string
+  is_open: boolean
+}
+
+class Comment {
+  content: string
+}
+
+class Reaction {
+  type: ReactionType
+}
+
+class Branch {
+  name: string
+}
+class Commit {
+  dateTime: date
+  msg: string
+}
+
+
+Repositorium--> "lead" User
+Repositorium--"0..*" --> "1..* developers" User
+Repositorium--*-- "0..*" Milestone
+Repositorium--"0..1" <-- "0..*" Task
+Task "0..*" --> "0..1 assigned_to" User
+Task "0..*" --> "creator" User
+Task <-- "0..*" Event
+Event "0..*" --> "0..1 author" User
+Event <|-- Comment
+Branch "1..*" --* Repositorium
+Branch "0..1 parent_branch" <-- "0..*" Branch
+Commit "0..*" --> "author" User
+Commit "0..*" --> "1..*" Branch
+Commit "0..*" --> "0..* parents" Commit
+Issue --|> Task
+Issue "0..*" --> "0..1" Milestone
+PullRequest --|> Task
+PullRequest "0..*" --* "target" Branch
+PullRequest "0..*" --* "source" Branch
+Reaction .. (User, Comment)
+@enduml
