@@ -4,8 +4,8 @@ from . import views, branches, pullreq,removeUser, milestone, log_view,tasks, iz
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('login', log_view.login, name='login'),
-    path('logout', log_view.logout, name='logout'),
+    path('login', log_view.loginU, name='loginU'),
+    path('logout', log_view.logoutU, name='logoutU'),
     path('profil', izmenaProfila.izmenaProfila, name='izmenaProfila'),
     path('brisanje/profila/', izmenaProfila.brisanjeProfila, name='brisanjeProfila'),
     path('register', izmenaProfila.registracija, name='register'),

@@ -13,10 +13,10 @@ from .util import convert_to_boolean
 # 403 kod greske, ali se dozvoljava eventualno logovanje.
 # podrazumevana putanja za logovanje je promenjena parametrom login_url
 
-def login(request):
+def loginU(request):
     # ukoliko je korisnik autentifikovan, proslediti ga na listu sa kasama
     if request.user.is_authenticated:
-        return redirect('lista_kasa')
+        return redirect('index')
     title = apps.get_app_config('prodavnice').verbose_name
     if request.method == 'GET':
         return render(request, "kase_login.html", {"title": title})
@@ -38,7 +38,7 @@ def login(request):
 
 
 # https://www.delftstack.com/howto/django/django-check-logged-in-user/
-def logout(request):
+def logoutU(request):
     # The user must be authenticated to do this.
     if request.user.is_authenticated:
         logout(request)
