@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block links %}
+    <ul>
+        <li><a href="{% url 'unos_repo' %}">Novi Repozitorijum</a></li>
+    </ul>
+{% endblock %}
+{% block content %}
+{% if repos %}
+    <table>
+      <tr>
+        <th>Naziv</th>
+        <th>Opis</th>
+        <th>Vidljivost</th>
+        <th>Stared</th>
+          <th>Udji</th>
+        <th>Brisanje</th>
+      </tr>
+    {% for p in repos %}
+      <tr>
+        <td>{{p.title}}</td>
+        <td>{{p.description}}</td>
+        <td>{{p.visibility}}</td>
+        <td>{{p.starred}}</td>
+        <td><a href="{% url 'repo' id=p.id%}" >Udji</a> </td>
+        <td><a href="{% url 'obrisiRepo' id=p.id %}">Obrisi</a></td>
+      </tr>
+    {% endfor %}
+    </table>
+
+{% else %}
+   <p>Nema Aktivnih Repozitorijuma</p>
+{% endif %}
+{% endblock %}

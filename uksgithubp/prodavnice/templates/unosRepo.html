@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 >Kreirajte novi Repozitorijum:</h1>
+    <form method="post" action="{% url 'unos_repo' %}">
+        {% csrf_token %}
+        <div class="label">Naziv:</div>
+        <div class="unos"><input type="text" name="title" value="{{ title }}" /></div>
+        {% if greska_title %}
+        <div class="greska" >{{greska_title}}</div>
+        {% endif %}
+        <div class="label">Opis:</div>
+        <div class="unos"><input type="text" name="description" value="{{ description }}"></div>
+        {% if greska_opis %}
+        <div class="greska" >{{greska_opis}}</div>
+        {% endif %}
+        <div class="label">licenca:</div>
+        <div class="unos"><input type="text" name="licenca" value="{{ licenca }}"></div>
+        {% if greska_licenca %}
+        <div class="greska" >{{greska_licenca}}</div>
+        {% endif %}
+        <div class="label">Public:</div>
+        <input type="checkbox" name="public" value="True"/>
+        <div  class="dugme"><input type="submit" value="unesi"/></div>
+
+    </form>
+{% endblock %}

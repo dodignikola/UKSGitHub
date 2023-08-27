@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div> Issues </div>
+    <table>
+      <tr>
+        <th>Naziv</th>
+        <th>Opis</th>
+        <th>Date</th>
+        <th>Repo</th>
+          <th>Assignee</th>
+        <th>Creator</th>
+          <th>Label</th>
+          <th>Milestone</th>
+          <th>IsOpen</th>
+      </tr>
+    {% for p in issues %}
+      <tr>
+        <td>{{p.title}}</td>
+        <td>{{p.description}}</td>
+        <td>{{p.date_created}}</td>
+        <td>{{p.repo}}</td>
+          <td>{{p.assignee}}</td>
+        <td>{{p.creator}}</td>
+        <td>{{p.labels}}</td>
+          <td>{{p.milestone}}</td>
+        <td>{{p.is_open}}</td>
+        <td><a href="{% url 'issue' id=p.id %}" >Udji</a> </td>
+        <td><a href="{% url 'obrisiissue' id=p.id %}">Obrisi</a></td>
+      </tr>
+    {% endfor %}
+    </table>
+<div> Tasks </div>
+    <table>
+      <tr>
+        <th>Naziv</th>
+        <th>Opis</th>
+        <th>Date</th>
+        <th>Repo</th>
+          <th>Assignee</th>
+        <th>Creator</th>
+          <th>Label</th>
+          <th>Milestone</th>
+          <th>IsOpen</th>
+      </tr>
+    {% for z in tasks %}
+      <tr>
+        <td>{{z.title}}</td>
+        <td>{{z.description}}</td>
+        <td>{{z.date_created}}</td>
+        <td>{{z.repo}}</td>
+          <td>{{z.assignee}}</td>
+        <td>{{z.creator}}</td>
+        <td><a href="{% url 'task' id=z.id %}" >Udji</a> </td>
+        <td><a href="{% url 'obrisitask' id=z.id %}">Obrisi</a></td>
+      </tr>
+    {% endfor %}
+    </table>
+{%if repo%}
+<table><td><a href="{% url 'opcijeRepo' id=repo.id %}">OPCIJE</a></td></table>
+    {% endif %}
+{% endblock %}
