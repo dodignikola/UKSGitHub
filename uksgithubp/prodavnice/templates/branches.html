@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block links %}
+    <ul>
+        <li><a href="{% url 'novagrana' %}">Nova Grana</a></li>
+    </ul>
+{% endblock %}
+{% block content %}
+{% if branches %}
+    <table>
+      <tr>
+        <th>Naziv</th>
+        <th>Repositorium</th>
+        <th>Perent</th>
+      </tr>
+    {% for p in branches %}
+      <tr>
+        <td>{{p.name}}</td>
+        <td>{{p.project}}</td>
+        <td>{{p.parent_branch}}</td>
+        <td><a href="{% url 'repo' id=p.id%}" >Merge</a> </td>
+        <td><a href="{% url 'brisiGrane' id=p.id %}">Obrisi</a></td>
+      </tr>
+    {% endfor %}
+    </table>
+{% else %}
+   <p>Nema Aktivnih Grana</p>
+{% endif %}
+{% endblock %}
