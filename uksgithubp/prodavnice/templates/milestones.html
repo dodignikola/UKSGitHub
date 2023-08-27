@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block links %}
+    <ul>
+        <li><a href="{% url 'nmilestone' %}">Novi Milestone</a></li>
+    </ul>
+{% endblock %}
+{% block content %}
+{% if milestones %}
+    <table>
+      <tr>
+        <th>Naziv</th>
+        <th>Status</th>
+        <th>Zavrsenost</th>
+        <th>Rok Do</th>
+          <th>Repozitorijum</th>
+      </tr>
+    {% for p in milestones %}
+      <tr>
+        <td>{{p.ime}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.precentage}} %</td>
+        <td>{{p.dueDate}}</td>
+          <td>{{p.repo}}</td>
+        <td><a href="{% url 'obrisiMile' id=p.id %}">Obrisi</a></td>
+      </tr>
+    {% endfor %}
+    </table>
+{% else %}
+   <p>Nema Aktivnih Repozitorijuma</p>
+{% endif %}
+{% endblock %}
