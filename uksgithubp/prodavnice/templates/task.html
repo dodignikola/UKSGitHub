@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+{%  if task %}
+<h1>Task : {{task.title}}</h1>
+    <form method="post" action="{% url 'task' id=task.id%}">
+        {% csrf_token %}
+        <table>
+                    <th>Komentar</th>
+        <th>Reakcija</th>
+      </tr>
+            {%  if r %}
+            {% for p in r %}
+            <tr>
+                <td>{{p.comment.content}}</td>
+                <td>{{p.type}}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        <tr><td>Komentar:</td>
+            <td>
+                <input type="text" name="comm" value="{{ comm }}" /></td>
+            <td>
+                {% if comOznaka %}
+                <div class="greska" >{{ comOznaka }}</div>
+                {% endif %}
+            </td>
+        </tr>
+            <tr>
+
+        <tr><td>Emotikon:</td>
+            <td>
+                <select name = emoji>
+                    <option value="LIKE">LIKE</option>
+                    <option value="DISLIKE"/>DISLIKE</option>
+                    <option value="SMILE"/>DISLIKE</SMILE>
+                    <option value="HOORAY">HOORAY</option>
+                    <option value="CONFUSED"/>CONFUSED</option>
+                    <option value="HEART"/>HEART</SMILE>
+                    <option value="ROCKET"/>ROCKET</option>
+                    <option value="EYES"/>EYES</SMILE>
+                </select>
+            </td>
+        </table>
+        <br>
+    <td><a href="{% url 'dodajKomentar' id=task.id %}">Komentarisi</a></td>
+        <br>
+        <br>
+    </form>
+{% endif %}
+{% endblock %}
