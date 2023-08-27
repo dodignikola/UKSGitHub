@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not request.user.is_authenticated %}
+    <h1 >Nemate profil</h1>
+{% else %}
+<h1 >Vas Profil:</h1>
+    <form method="post" action="{% url 'izmenaProfila' %}">
+        {% csrf_token %}
+        <table>
+        <tr><td>Username:</td>
+            <td>
+                <input type="text" name="user" value="{{ user }}" /></td>
+        </tr>
+        <tr><td>Email:</td>
+            <td>
+               <input type="email" name="email" value="{{ email }}"></td>
+        </tr>
+        <tr>
+            <td>Password1:</td>
+            <td>
+               <input type="password" name="password" value="{{ password }}">
+            </td>
+        </tr>
+        <tr>
+            <td>Password2:</td>
+            <td>
+               <input type="password" name="password2" value="{{ password2 }}">
+            </td>
+        </tr>
+            <tr>
+            <td><input type="submit" value="Izmeni"/></td>
+                <td><a href="{% url 'brisanjeProfila' %}">Obrisi</a></td>
+        </tr>
+        </table>
+    </form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,49 @@
+<h1>Registrujte se:</h1>
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        <table>
+        <tr><td>Username:</td>
+            <td>
+                <input type="text" name="userime" value="{{ userime }}" /></td>
+            <td>
+                {% if usernameOznaka %}
+                <div class="greska" >{{ usernameOznaka }}</div>
+                {% endif %}
+            </td>
+        </tr>
+        <tr><td>Email:</td>
+            <td>
+               <input type="email" name="emailic" value="{{ emailic }}"></td>
+            <td>
+                {% if emailOznaka %}
+                <div class="greska" >{{ emailOznaka }}</div>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>Password1:</td>
+            <td>
+               <input type="password" name="password" value="{{ password }}">
+            <td>
+                {% if passwordOznaka %}
+                <div class="greska" >{{ passwordOznaka }}</div>
+                {% endif %}
+            </td>
+            </td>
+        </tr>
+        <tr>
+            <td>Password2:</td>
+            <td>
+               <input type="password" name="password2" value="{{ password2 }}">
+            <td>
+                {% if passwordOznaka %}
+                <div class="greska" >{{ passwordOznaka }}</div>
+                {% endif %}
+            </td>
+            </td>
+        </tr>
+            <tr>
+            <td><input type="submit" value="Registruj se"/></td>
+        </tr>
+        </table>
+    </form>
